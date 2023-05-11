@@ -1,0 +1,25 @@
+
+.title {
+  margin: 0px;
+  margin-top: 20px;
+  padding: 10px 10px 0px;
+}
+
+.content {
+  flex: auto;
+}
+
+.footer {
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  position: sticky;
+  display: flex;
+  gap: 10px;
+  bottom: 0px;
+  min-height: 50px;
+}
+
+button.footer-button {
+  --size: 45px;
+}

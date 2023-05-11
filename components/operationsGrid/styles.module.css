@@ -1,0 +1,65 @@
+
+
+.operations-container {
+  flex-direction: column;
+  display: flex;
+  gap: 15px;
+  margin: 10px 20px;
+}
+
+.title {
+  padding: 0px 5px 5px; 
+  border-bottom: 2px solid;
+}
+
+.grid {
+  --size: 80px;
+  display: grid;
+  gap: 15px;
+  margin: 0px 10px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--size), 1fr));
+}
+
+.grid .item {
+  justify-content: center;
+  flex-direction: column;
+  background: #f0f0f5;
+  align-items: center;
+  height: var(--size);
+  position: relative;
+  color: #2d3341;
+  display: flex;
+  gap: 10px;
+  padding: 5px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid #b8b8bc;
+}
+
+.grid .item::after {
+  position: absolute;
+  content: "";
+  top: -5px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.grid .item.income::after {
+  background-color: var(--income-color);
+}
+
+.grid .item.expense::after {
+  background-color: var(--expense-color);
+}
+
+.grid .item-title {
+  text-overflow: ellipsis;
+  text-align: center;
+  white-space: pre;
+  overflow: hidden;
+  width: 100%;
+  font-size: .8rem;
+}
+

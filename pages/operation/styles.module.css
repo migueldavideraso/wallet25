@@ -1,0 +1,24 @@
+
+.link {
+  font-size: .85rem;
+  margin: -10px auto 0px;
+}
+
+.operation-point {
+  --size: 20px;
+  height: var(--size);
+  width: var(--size);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  transition: background-color .3s;
+}
+
+.operation-point:global(.income) {
+  background-color: var(--income-color);
+}
+
+.operation-point:global(.expense) {
+  background-color: var(--expense-color);
+}
