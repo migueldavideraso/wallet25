@@ -14,7 +14,7 @@ interface IDeleteOperationButtonProps {
   openBackdrop: () => void
 }
 
-export function DeleteOperationButton ({ operation, closeBackdrop, openBackdrop }: IDeleteOperationButtonProps) {
+export default function DeleteOperationButton ({ operation, closeBackdrop, openBackdrop }: IDeleteOperationButtonProps) {
 
   const { Alert, handleOpenDeleteOperationAlert } = useDeleteOperationAlert({ operation, closeBackdrop, openBackdrop })
 

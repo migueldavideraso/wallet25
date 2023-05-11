@@ -9,8 +9,8 @@ import styles from '../styles.module.css'
 import { IOperation } from '@/types/data'
 import { useState, useEffect } from 'react'
 import { getOperation } from '@/services/operations'
-import { OperationInfo } from './OperationInfo'
-import { DeleteOperationButton } from './DeleteOperationButton'
+import OperationInfo from './OperationInfo'
+import DeleteOperationButton from './DeleteOperationButton'
 
 
 

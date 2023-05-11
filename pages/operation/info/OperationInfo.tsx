@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 
 
-export function OperationInfo ({ operation }: { operation: IOperation }) {
+export default function OperationInfo ({ operation }: { operation: IOperation }) {
 
   const { categoryName, typeName, DatePicker } = useOperationData({ operation })
 
