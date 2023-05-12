@@ -45,6 +45,11 @@ export function onAuthChanged (callback: TUserCallback) {
 
   function __callback (type: TUserType, newUser: IUser|null) {
 
+    // Si el usuario ya tiene sesion iniciada en firebase
+    if (userType == null && newUser != null && user == null) {
+      userType = 'firebase'
+    }
+
     // No permitir inicio de sesion si ya hay un usuario existente
     if (user !== null && newUser !== null) {
       callback(user)
