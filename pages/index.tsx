@@ -40,8 +40,12 @@ export default function Home () {
       const data = getSignUpData(formData)
       singUp(data)
     }
-
   }
+
+  function signInProofAccount () {
+    singIn(null)
+  }
+
 
   return (
     <>
@@ -66,11 +70,13 @@ export default function Home () {
         <span className='flex' />
 
         <Button type='submit'>{option}</Button>
+        <Button color='secondary' size='small' onClick={signInProofAccount} >Cuenta de Prueba</Button>
 
         <section className={styles['options']}>
           {getOptionLink('Sign In')}
           {getOptionLink('Sign Up')}
         </section>
+
 
       </form>
 

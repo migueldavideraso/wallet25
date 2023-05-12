@@ -74,7 +74,7 @@ function useOperation ({ openBackdrop, closeBackdrop, id }: IUseOperation) {
 
     getOperation(id)
     .then((result) => {
-      if (result.status === 'success') {
+      if (result.status === 'success' && typeof result.result !== 'string') {
         setOperation(result.result)
       }
       else {

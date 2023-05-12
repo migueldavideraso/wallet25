@@ -1,5 +1,5 @@
 
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import styles from './styles.module.css'
 import { useAuth } from '@/hooks/auth';
 import { CircularProgress } from '@mui/material';

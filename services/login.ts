@@ -1,5 +1,9 @@
 
 import {
+  IUser,
+} from "@/types/data"
+
+import {
   ISingInProps,
   ISingUpProps,
   TUserCallback
@@ -12,7 +16,23 @@ import {
   onAuthChanged as onAuthChangedFirebase
 } from "./firebase/auth"
 
+import {
+  onAuthChanged as onAuthChangedMock,
+  signIn as signInMock,
+  signOut as signOutMock,
+} from './mocks/auth'
+
+
 import { initFirebase } from "./firebase/main"
+
+
+type TUserType = null|'firebase'|'mock'
+
+let userType:TUserType = null
+
+export function getUserType ():TUserType {
+  return userType
+}
 
 
 export function initApp () {
@@ -20,11 +40,63 @@ export function initApp () {
 }
 
 export function onAuthChanged (callback: TUserCallback) {
-  return onAuthChangedFirebase(callback)
+
+  let user: IUser|null = null
+
+  function __callback (type: TUserType, newUser: IUser|null) {
+
+    // No permitir inicio de sesion si ya hay un usuario existente
+    if (user !== null && newUser !== null) {
+      callback(user)
+      return
+    }
+
+    // Cerrar sesion del usuario
+    if (user !== null && newUser == null && type === userType) {
+      user = null
+      callback(null)
+      return
+    }
+
+    // Iniciar Sesion
+    if (user === null && newUser !== null) {
+      user = newUser
+      callback(user)
+      return
+    }
+
+    callback(user)
+  } 
+
+  const unsubscribes = [
+    onAuthChangedFirebase((user) => __callback('firebase', user)),
+    onAuthChangedMock((user) => __callback('mock', user)),
+  ]
+  return () => unsubscribes.forEach(fn => fn())
 }
 
-export async function singIn (args: ISingInProps) {
-  return await singInFirebase(args)
+export async function singIn (args: ISingInProps|null) {
+
+  // No permitir inicio de sesion si ya hay un usuario existente
+  if (userType !== null) {
+    return null
+  }
+
+  if (args == null) {
+    userType = 'mock'
+    signInMock()
+    return null
+  }
+  else {
+
+    const user = await singInFirebase(args)
+
+    if (user != null) {
+      userType = 'firebase'
+    }
+
+    return user
+  }
 }
 
 export async function singUp (args: ISingUpProps) {
@@ -32,5 +104,13 @@ export async function singUp (args: ISingUpProps) {
 }
 
 export async function signOut () {
-  return await signOutFirebase()
+
+  if (userType === 'firebase') {
+    await signOutFirebase()
+  }
+  else if (userType === 'mock') {
+    signOutMock()
+  }
+
+  userType = null
 }
