@@ -70,7 +70,7 @@ export default function Home () {
         <span className='flex' />
 
         <Button type='submit'>{option}</Button>
-        <Button color='secondary' size='small' onClick={signInProofAccount} >Cuenta de Prueba</Button>
+        <Button color='secondary' size='small' onClick={signInProofAccount} >Proof Account</Button>
 
         <section className={styles['options']}>
           {getOptionLink('Sign In')}
